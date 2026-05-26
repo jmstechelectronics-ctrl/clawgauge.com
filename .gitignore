@@ -2,5 +2,6 @@
 Thumbs.db
 .netlify/
 .check-*.png
+.live-*.png
 .preview-*.png
 .deployed-*.png
