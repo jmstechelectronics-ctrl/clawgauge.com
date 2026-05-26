@@ -1,5 +1,6 @@
 .DS_Store
 Thumbs.db
 .netlify/
+.check-*.png
 .preview-*.png
 .deployed-*.png
