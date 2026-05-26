@@ -127,10 +127,7 @@
     .masthead {
       position: relative;
       overflow: hidden;
-      min-height: clamp(170px, 22vw, 300px);
-      display: flex;
-      align-items: flex-start;
-      background: linear-gradient(180deg, rgba(3, 8, 18, 0.12), rgba(4, 12, 24, 0.70));
+      background: linear-gradient(180deg, rgba(3, 8, 18, 0.96), rgba(4, 12, 24, 0.92));
       border-bottom: 1px solid rgba(132, 175, 255, 0.10);
     }
 
@@ -139,9 +136,9 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(3, 7, 16, 0.08), rgba(3, 7, 16, 0.48)),
-        url("assets/logo-banner.png") center center / 100% 100% no-repeat;
-      opacity: 1;
+        linear-gradient(90deg, rgba(3, 7, 16, 0.94), rgba(3, 7, 16, 0.70), rgba(3, 7, 16, 0.88)),
+        url("assets/logo-banner.png") right center / auto 100% no-repeat;
+      opacity: 0.58;
       pointer-events: none;
     }
 
@@ -149,43 +146,56 @@
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(900px 320px at 26% 12%, rgba(68, 213, 255, 0.12), transparent 58%),
-        radial-gradient(860px 300px at 84% 22%, rgba(47, 139, 255, 0.20), transparent 58%);
+      background: linear-gradient(180deg, rgba(68, 213, 255, 0.06), transparent 80%);
       pointer-events: none;
       mix-blend-mode: screen;
     }
 
     .topbar {
-      position: sticky;
-      top: 0;
+      position: relative;
       width: 100%;
       z-index: 50;
-      backdrop-filter: blur(18px) saturate(1.15);
-      background: linear-gradient(90deg, rgba(2, 6, 16, 0.20), rgba(2, 6, 16, 0.74));
-      border-bottom: 1px solid rgba(132, 175, 255, 0.10);
+      background: rgba(2, 6, 16, 0.48);
     }
 
     .topbar-inner {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: space-between;
       gap: 18px;
-      padding: 14px 0;
+      min-height: 74px;
+      padding: 10px 0;
     }
 
     .brand {
-      display: none;
+      display: inline-flex;
       align-items: center;
-      gap: 14px;
+      gap: 10px;
       text-decoration: none;
       min-width: 0;
+      color: #f1f7ff;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0;
     }
 
     .brand img {
-      width: min(240px, 44vw);
-      height: auto;
-      filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.38));
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      filter: none;
+    }
+
+    .brand span {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0;
+      white-space: nowrap;
+    }
+
+    .brand b {
+      color: var(--cyan);
+      font-weight: 800;
     }
 
     .brand-mark {
@@ -215,11 +225,12 @@
 
     .nav a {
       text-decoration: none;
-      color: rgba(235, 243, 255, 0.82);
+      color: rgba(235, 243, 255, 0.88);
       font-size: 0.94rem;
-      padding: 9px 12px;
+      padding: 8px 11px;
       border-radius: 999px;
       border: 1px solid transparent;
+      background: rgba(4, 12, 24, 0.18);
       transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
 
@@ -826,22 +837,24 @@
 
     footer {
       margin-top: 26px;
-      padding: 34px 0 42px;
+      padding: 30px 0 34px;
       position: relative;
       overflow: hidden;
-      min-height: 230px;
       border-top: 1px solid rgba(145, 189, 255, 0.12);
-      background: linear-gradient(180deg, rgba(3, 8, 18, 0.12), rgba(4, 12, 25, 0.70));
+      background: linear-gradient(180deg, rgba(3, 8, 18, 0.98), rgba(4, 12, 25, 0.94));
     }
 
     footer::before {
       content: "";
       position: absolute;
-      inset: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 66%;
       background:
-        linear-gradient(90deg, rgba(3, 7, 16, 0.36), rgba(3, 7, 16, 0.80)),
-        url("assets/logo-banner.png") center center / 100% 100% no-repeat;
-      opacity: 0.72;
+        linear-gradient(90deg, rgba(3, 7, 16, 0.98), rgba(3, 7, 16, 0.78), rgba(3, 7, 16, 0.92)),
+        url("assets/logo-banner.png") right center / auto 100% no-repeat;
+      opacity: 0.22;
       pointer-events: none;
     }
 
@@ -850,8 +863,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(900px 260px at 18% 0%, rgba(68, 213, 255, 0.10), transparent 56%),
-        radial-gradient(820px 220px at 80% 20%, rgba(47, 139, 255, 0.16), transparent 62%);
+        linear-gradient(90deg, rgba(3, 8, 18, 0.94), rgba(3, 8, 18, 0.68)),
+        radial-gradient(820px 220px at 86% 20%, rgba(47, 139, 255, 0.12), transparent 62%);
       pointer-events: none;
       mix-blend-mode: screen;
     }
@@ -860,9 +873,9 @@
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
       gap: 28px;
-      align-items: end;
+      align-items: start;
     }
 
     .footer-nav {
@@ -871,6 +884,7 @@
       gap: 8px;
       align-items: center;
       justify-content: flex-end;
+      max-width: 520px;
     }
 
     .footer-nav a {
@@ -894,7 +908,6 @@
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      flex-wrap: wrap;
       max-width: 560px;
     }
 
@@ -902,16 +915,16 @@
       width: 44px;
       height: 44px;
       flex: 0 0 auto;
-      border-radius: 14px;
+      border-radius: 12px;
       padding: 6px;
-      background: rgba(7, 16, 31, 0.7);
+      background: rgba(7, 16, 31, 0.82);
       border: 1px solid rgba(145, 189, 255, 0.12);
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
     }
 
     .footer-brand-copy {
       display: grid;
-      gap: 6px;
+      gap: 5px;
     }
 
     .footer-brand strong {
@@ -937,7 +950,7 @@
 
     .footer-right {
       display: grid;
-      gap: 14px;
+      gap: 12px;
       justify-items: end;
     }
 
@@ -994,6 +1007,10 @@
       .topbar-inner {
         align-items: flex-start;
         justify-content: flex-start;
+        flex-direction: column;
+        gap: 12px;
+        min-height: 0;
+        padding: 14px 0;
       }
       .nav {
         justify-content: flex-start;
@@ -1040,6 +1057,16 @@
         justify-items: start;
         justify-content: flex-start;
       }
+      footer::before,
+      .masthead::before {
+        background:
+          linear-gradient(90deg, rgba(3, 7, 16, 0.92), rgba(3, 7, 16, 0.76)),
+          url("assets/logo-banner.png") center center / auto 100% no-repeat;
+      }
+      footer::before {
+        left: 0;
+        opacity: 0.12;
+      }
       h1 {
         font-size: clamp(2.35rem, 14vw, 4rem);
       }
@@ -1070,7 +1097,8 @@
       <div class="topbar">
         <div class="container topbar-inner">
           <a class="brand" href="#top" aria-label="ClawGauge home">
-            <img src="assets/logo-banner.png" alt="ClawGauge logo" />
+            <img src="favicon.svg" alt="" aria-hidden="true" />
+            <span>Claw<b>Gauge</b></span>
           </a>
           <nav class="nav" aria-label="Primary">
             <a href="#features">What it does</a>
