@@ -1,0 +1,1297 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="ClawGauge is an experimental crypto trading automation project under active testing. It focuses on market scanning, risk controls, decision logging and human oversight." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="theme-color" content="#07101f" />
+  <link rel="canonical" href="https://clawgauge.com/" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <title>ClawGauge | AI-assisted crypto trading automation, under active testing.</title>
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ClawGauge" />
+  <meta property="og:title" content="ClawGauge | AI-assisted crypto trading automation, under active testing." />
+  <meta property="og:description" content="ClawGauge monitors market conditions, risk signals and trade opportunities to support disciplined automated decision-making." />
+  <meta property="og:url" content="https://clawgauge.com/" />
+  <meta property="og:image" content="https://clawgauge.com/assets/logo-banner.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ClawGauge | AI-assisted crypto trading automation, under active testing." />
+  <meta name="twitter:description" content="ClawGauge monitors market conditions, risk signals and trade opportunities to support disciplined automated decision-making." />
+  <meta name="twitter:image" content="https://clawgauge.com/assets/logo-banner.png" />
+
+  <style>
+    :root {
+      --bg: #06101f;
+      --bg-2: #091629;
+      --panel: rgba(10, 22, 40, 0.76);
+      --panel-2: rgba(12, 27, 48, 0.92);
+      --line: rgba(133, 186, 255, 0.16);
+      --line-strong: rgba(73, 157, 255, 0.35);
+      --text: #ebf3ff;
+      --muted: #a4b7d6;
+      --muted-2: #7d90b4;
+      --cyan: #44d5ff;
+      --blue: #2f8bff;
+      --blue-2: #0e61f4;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.36);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 18% 6%, rgba(46, 120, 255, 0.20), transparent 55%),
+        radial-gradient(1000px 700px at 85% 15%, rgba(68, 213, 255, 0.10), transparent 52%),
+        linear-gradient(180deg, #050b16 0%, #07101f 28%, #07111f 100%);
+      font-family: "Segoe UI", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body::before {
+      background-image:
+        linear-gradient(rgba(152, 198, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(152, 198, 255, 0.05) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.92) 22%, rgba(0,0,0,0.85) 100%);
+      opacity: 0.45;
+    }
+
+    body::after {
+      background:
+        radial-gradient(700px 260px at 50% 78%, rgba(47, 139, 255, 0.16), transparent 60%),
+        radial-gradient(500px 180px at 16% 84%, rgba(68, 213, 255, 0.08), transparent 62%);
+      opacity: 0.9;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -48px;
+      left: 16px;
+      z-index: 999;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #ffffff;
+      color: #0a1330;
+      text-decoration: none;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .shell {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px) saturate(1.2);
+      background: rgba(5, 11, 22, 0.72);
+      border-bottom: 1px solid rgba(132, 175, 255, 0.10);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: min(240px, 44vw);
+      height: auto;
+      filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.38));
+    }
+
+    .brand-mark {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-mark strong {
+      font-size: 0.94rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(235, 243, 255, 0.92);
+    }
+
+    .brand-mark span {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: rgba(235, 243, 255, 0.82);
+      font-size: 0.94rem;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      background: rgba(68, 213, 255, 0.08);
+      border-color: rgba(68, 213, 255, 0.18);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .hero {
+      padding: 34px 0 24px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.03fr 0.97fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-visual,
+    .card,
+    .panel,
+    .roadmap-card,
+    .contact-card {
+      background: linear-gradient(180deg, rgba(14, 31, 55, 0.84), rgba(8, 18, 35, 0.93));
+      border: 1px solid rgba(145, 189, 255, 0.12);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      border-radius: var(--radius-xl);
+      padding: clamp(22px, 4vw, 42px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-copy::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(440px 220px at 20% 12%, rgba(68, 213, 255, 0.14), transparent 62%),
+        radial-gradient(520px 260px at 100% 0%, rgba(47, 139, 255, 0.16), transparent 58%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(68, 213, 255, 0.09);
+      border: 1px solid rgba(68, 213, 255, 0.18);
+      color: #cbefff;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      margin: 18px 0 12px;
+      font-size: clamp(2.55rem, 6vw, 4.85rem);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      text-wrap: balance;
+    }
+
+    .lead {
+      position: relative;
+      z-index: 1;
+      max-width: 54ch;
+      color: rgba(235, 243, 255, 0.82);
+      font-size: clamp(1.02rem, 1.6vw, 1.18rem);
+      margin-bottom: 22px;
+    }
+
+    .hero-actions {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .btn-primary {
+      color: #04101d;
+      background: linear-gradient(135deg, var(--cyan), #91f0ff);
+      box-shadow: 0 14px 30px rgba(68, 213, 255, 0.22);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      box-shadow: 0 16px 32px rgba(68, 213, 255, 0.30);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(157, 198, 255, 0.18);
+    }
+
+    .hero-micro {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 20px;
+    }
+
+    .micro-card {
+      padding: 14px 15px;
+      border-radius: 18px;
+      background: rgba(9, 20, 39, 0.68);
+      border: 1px solid rgba(144, 190, 255, 0.11);
+    }
+
+    .micro-card strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1rem;
+    }
+
+    .micro-card span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .disclaimer {
+      position: relative;
+      z-index: 1;
+      margin: 18px 0 0;
+      color: #d1ddf3;
+      font-size: 0.94rem;
+      padding: 14px 16px;
+      border-left: 3px solid rgba(68, 213, 255, 0.78);
+      background: rgba(4, 14, 28, 0.68);
+      border-radius: 14px;
+    }
+
+    .hero-visual {
+      border-radius: var(--radius-xl);
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+      min-height: 100%;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(46, 120, 255, 0.10), transparent 28%),
+        radial-gradient(420px 260px at 90% 10%, rgba(68, 213, 255, 0.16), transparent 50%),
+        radial-gradient(640px 300px at 30% 84%, rgba(47, 139, 255, 0.18), transparent 60%);
+      pointer-events: none;
+    }
+
+    .chart-shell {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      min-height: 540px;
+      border-radius: calc(var(--radius-xl) - 6px);
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(7, 15, 29, 0.92), rgba(8, 21, 40, 0.98)),
+        radial-gradient(900px 360px at 50% 100%, rgba(47, 139, 255, 0.18), transparent 62%);
+      border: 1px solid rgba(129, 179, 255, 0.16);
+    }
+
+    .chart-labels {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 18px 18px 0;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(68, 213, 255, 0.08);
+      border: 1px solid rgba(68, 213, 255, 0.16);
+      color: #d7f7ff;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .chart-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin-top: 8px;
+    }
+
+    .section {
+      padding: 26px 0 8px;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 18px;
+      max-width: 64ch;
+    }
+
+    .section-kicker {
+      color: #c2dbff;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 0;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      max-width: 68ch;
+      margin-bottom: 0;
+    }
+
+    .grid-5 {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card,
+    .roadmap-card,
+    .contact-card,
+    .panel {
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before,
+    .roadmap-card::before,
+    .contact-card::before,
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(68, 213, 255, 0.06), transparent 40%);
+      pointer-events: none;
+    }
+
+    .card h3,
+    .roadmap-card h3 {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 10px;
+      font-size: 1.08rem;
+      letter-spacing: -0.02em;
+    }
+
+    .card p,
+    .roadmap-card p,
+    .contact-card p,
+    .panel p {
+      position: relative;
+      z-index: 1;
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .card {
+      min-height: 190px;
+    }
+
+    .card-icon {
+      position: relative;
+      z-index: 1;
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, rgba(68, 213, 255, 0.16), rgba(47, 139, 255, 0.08));
+      border: 1px solid rgba(123, 178, 255, 0.16);
+      color: #cfefff;
+      box-shadow: inset 0 0 24px rgba(68, 213, 255, 0.08);
+    }
+
+    .card-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .story-panel {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .story-panel .panel {
+      min-height: 100%;
+    }
+
+    .panel-quote {
+      font-size: clamp(1.25rem, 2vw, 1.6rem);
+      line-height: 1.35;
+      color: #f0f7ff;
+      margin-bottom: 14px;
+      letter-spacing: -0.03em;
+    }
+
+    .metric-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric {
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(7, 16, 31, 0.58);
+      border: 1px solid rgba(130, 178, 255, 0.12);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.04rem;
+      margin-bottom: 6px;
+    }
+
+    .metric span {
+      color: var(--muted-2);
+      font-size: 0.9rem;
+    }
+
+    .testing-banner {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(47, 139, 255, 0.18), rgba(68, 213, 255, 0.08)),
+        rgba(7, 16, 31, 0.72);
+      border: 1px solid rgba(144, 190, 255, 0.18);
+      box-shadow: var(--shadow);
+    }
+
+    .testing-banner strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.1rem;
+    }
+
+    .testing-banner p {
+      margin-bottom: 0;
+      color: rgba(235, 243, 255, 0.82);
+    }
+
+    .roadmap-card {
+      min-height: 100%;
+    }
+
+    .phase {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(68, 213, 255, 0.09);
+      color: #d6f8ff;
+      border: 1px solid rgba(68, 213, 255, 0.15);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 700;
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    label {
+      display: grid;
+      gap: 7px;
+      color: #dce8fb;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      appearance: none;
+      border: 1px solid rgba(151, 192, 255, 0.14);
+      background: rgba(6, 14, 28, 0.78);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 13px 14px;
+      font: inherit;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: rgba(68, 213, 255, 0.52);
+      box-shadow: 0 0 0 4px rgba(68, 213, 255, 0.12);
+    }
+
+    select {
+      cursor: pointer;
+      background-image:
+        linear-gradient(45deg, transparent 50%, rgba(207, 239, 255, 0.85) 50%),
+        linear-gradient(135deg, rgba(207, 239, 255, 0.85) 50%, transparent 50%);
+      background-position:
+        calc(100% - 18px) calc(1.1em),
+        calc(100% - 13px) calc(1.1em);
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+      padding-right: 42px;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .form-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .contact-card h3,
+    .contact-card p {
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-card p + .small-list {
+      margin-top: 18px;
+    }
+
+    .small-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .small-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: #d8e6fc;
+    }
+
+    .small-list li::before {
+      content: "";
+      flex: 0 0 auto;
+      width: 10px;
+      height: 10px;
+      margin-top: 0.44em;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--cyan), var(--blue));
+      box-shadow: 0 0 18px rgba(68, 213, 255, 0.42);
+    }
+
+    footer {
+      margin-top: 26px;
+      padding: 24px 0 42px;
+      border-top: 1px solid rgba(145, 189, 255, 0.12);
+      background: linear-gradient(180deg, transparent, rgba(4, 12, 25, 0.72));
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .footer-brand {
+      display: grid;
+      gap: 6px;
+    }
+
+    .footer-brand strong {
+      font-size: 1.05rem;
+    }
+
+    .footer-brand span,
+    .footer-note {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .footer-note {
+      max-width: 60ch;
+      text-align: right;
+    }
+
+    .reveal {
+      animation: rise 0.65s ease both;
+    }
+
+    .delay-1 { animation-delay: 0.08s; }
+    .delay-2 { animation-delay: 0.16s; }
+    .delay-3 { animation-delay: 0.24s; }
+    .delay-4 { animation-delay: 0.32s; }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .contact-wrap,
+      .grid-5,
+      .grid-4,
+      .grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+      .grid-5 .card:last-child {
+        grid-column: auto;
+      }
+      .chart-shell {
+        min-height: 470px;
+      }
+      .metric-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .nav {
+        justify-content: flex-start;
+      }
+      .hero {
+        padding-top: 24px;
+      }
+      .hero-grid,
+      .contact-wrap,
+      .grid-5,
+      .grid-4,
+      .grid-2,
+      .hero-micro {
+        grid-template-columns: 1fr;
+      }
+      .chart-shell {
+        min-height: 420px;
+      }
+      .footer-inner {
+        align-items: flex-start;
+      }
+      .footer-note {
+        text-align: left;
+      }
+      h1 {
+        font-size: clamp(2.35rem, 14vw, 4rem);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      .reveal {
+        animation: none;
+      }
+      .btn,
+      .nav a,
+      input,
+      select,
+      textarea {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <div class="shell">
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a class="brand" href="#top" aria-label="ClawGauge home">
+          <img src="assets/logo-banner.png" alt="ClawGauge logo" />
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <a href="#features">What it does</a>
+          <a href="#why">Why it exists</a>
+          <a href="#testing">Testing</a>
+          <a href="#roadmap">Roadmap</a>
+          <a href="#contact">Register interest</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="content">
+      <section class="hero" id="top">
+        <div class="container hero-grid">
+          <div class="hero-copy reveal">
+            <span class="eyebrow">Private build / Active testing</span>
+            <h1>AI-assisted crypto trading automation, under active testing.</h1>
+            <p class="lead">
+              ClawGauge monitors market conditions, risk signals and trade opportunities to support disciplined automated decision-making.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#contact">Register interest</a>
+              <a class="btn btn-secondary" href="#testing">View project status</a>
+            </div>
+
+            <div class="hero-micro">
+              <div class="micro-card">
+                <strong>Signal scanning</strong>
+                <span>Market structure, momentum and setup review.</span>
+              </div>
+              <div class="micro-card">
+                <strong>Risk controls</strong>
+                <span>Rules-first gating before anything reaches execution.</span>
+              </div>
+              <div class="micro-card">
+                <strong>Decision logging</strong>
+                <span>Every key action is recorded for review and oversight.</span>
+              </div>
+            </div>
+
+            <p class="disclaimer">
+              ClawGauge is experimental software. Nothing on this site is financial advice, investment advice or a public offer to invest. Crypto assets are volatile and may result in loss.
+            </p>
+          </div>
+
+          <div class="hero-visual reveal delay-1" aria-hidden="true">
+            <div class="chart-shell">
+              <div class="chart-labels">
+                <span class="pill">Risk-gated</span>
+                <span class="pill">Test bench</span>
+                <span class="pill">Human oversight</span>
+              </div>
+              <svg class="chart-svg" viewBox="0 0 900 560" role="img" aria-label="Decorative candlestick chart with blue trend line">
+                <defs>
+                  <linearGradient id="glowLine" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#1f7bff" />
+                    <stop offset="48%" stop-color="#44d5ff" />
+                    <stop offset="100%" stop-color="#9cf8ff" />
+                  </linearGradient>
+                  <linearGradient id="candleFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#4eb5ff" />
+                    <stop offset="100%" stop-color="#0e45bb" />
+                  </linearGradient>
+                  <linearGradient id="gridFade" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="rgba(255,255,255,0.12)" />
+                    <stop offset="100%" stop-color="rgba(255,255,255,0.02)" />
+                  </linearGradient>
+                  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="8" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                  <pattern id="grid" width="72" height="72" patternUnits="userSpaceOnUse">
+                    <path d="M 72 0 L 0 0 0 72" fill="none" stroke="rgba(160, 195, 255, 0.12)" stroke-width="1" />
+                  </pattern>
+                </defs>
+                <rect width="900" height="560" fill="url(#grid)" opacity="0.68" />
+                <path d="M0 118 C 100 186, 180 228, 270 184 S 460 88, 560 158 S 720 242, 900 96" fill="none" stroke="rgba(47, 139, 255, 0.18)" stroke-width="4" />
+                <path d="M0 420 C 104 460, 170 410, 244 368 S 368 318, 450 386 S 610 476, 724 386 S 812 220, 900 118" fill="none" stroke="url(#glowLine)" stroke-width="6" filter="url(#glow)" />
+                <path d="M0 480 C 80 478, 156 434, 222 444 S 382 510, 470 480 S 642 334, 734 340 S 830 250, 900 200" fill="none" stroke="rgba(68, 213, 255, 0.12)" stroke-width="3" />
+
+                <g opacity="0.95">
+                  <g transform="translate(44 355)">
+                    <line x1="0" y1="30" x2="0" y2="-40" stroke="rgba(106, 176, 255, 0.26)" stroke-width="4" />
+                    <rect x="-16" y="-6" width="32" height="40" rx="3" fill="url(#candleFill)" />
+                  </g>
+                  <g transform="translate(92 316)">
+                    <line x1="0" y1="38" x2="0" y2="-56" stroke="rgba(106, 176, 255, 0.26)" stroke-width="4" />
+                    <rect x="-16" y="-8" width="32" height="52" rx="3" fill="url(#candleFill)" />
+                  </g>
+                  <g transform="translate(146 280)">
+                    <line x1="0" y1="46" x2="0" y2="-72" stroke="rgba(106, 176, 255, 0.22)" stroke-width="4" />
+                    <rect x="-16" y="-14" width="32" height="58" rx="3" fill="url(#candleFill)" />
+                  </g>
+                  <g transform="translate(198 252)">
+                    <line x1="0" y1="52" x2="0" y2="-68" stroke="rgba(106, 176, 255, 0.20)" stroke-width="4" />
+                    <rect x="-16" y="6" width="32" height="42" rx="3" fill="url(#candleFill)" />
+                  </g>
+                  <g transform="translate(254 272)">
+                    <line x1="0" y1="44" x2="0" y2="-86" stroke="rgba(106, 176, 255, 0.18)" stroke-width="4" />
+                    <rect x="-16" y="-6" width="32" height="44" rx="3" fill="url(#candleFill)" />
+                  </g>
+                  <g transform="translate(332 305)">
+                    <line x1="0" y1="48" x2="0" y2="-76" stroke="rgba(106, 176, 255, 0.18)" stroke-width="4" />
+                    <rect x="-16" y="-18" width="32" height="60" rx="3" fill="url(#candleFill)" />
+                  </g>
+                  <g transform="translate(388 344)">
+                    <line x1="0" y1="42" x2="0" y2="-58" stroke="rgba(106, 176, 255, 0.18)" stroke-width="4" />
+                    <rect x="-16" y="-2" width="32" height="34" rx="3" fill="url(#candleFill)" />
+                  </g>
+                  <g transform="translate(456 330)">
+                    <line x1="0" y1="58" x2="0" y2="-108" stroke="rgba(106, 176, 255, 0.20)" stroke-width="4" />
+                    <rect x="-16" y="-4" width="32" height="64" rx="3" fill="url(#candleFill)" />
+                  </g>
+                  <g transform="translate(528 304)">
+                    <line x1="0" y1="52" x2="0" y2="-84" stroke="rgba(106, 176, 255, 0.22)" stroke-width="4" />
+                    <rect x="-16" y="-10" width="32" height="56" rx="3" fill="url(#candleFill)" />
+                  </g>
+                  <g transform="translate(596 262)">
+                    <line x1="0" y1="46" x2="0" y2="-92" stroke="rgba(106, 176, 255, 0.20)" stroke-width="4" />
+                    <rect x="-16" y="-10" width="32" height="56" rx="3" fill="url(#candleFill)" />
+                  </g>
+                  <g transform="translate(660 222)">
+                    <line x1="0" y1="50" x2="0" y2="-110" stroke="rgba(106, 176, 255, 0.18)" stroke-width="4" />
+                    <rect x="-16" y="-14" width="32" height="66" rx="3" fill="url(#candleFill)" />
+                  </g>
+                  <g transform="translate(724 172)">
+                    <line x1="0" y1="58" x2="0" y2="-126" stroke="rgba(106, 176, 255, 0.18)" stroke-width="4" />
+                    <rect x="-16" y="-6" width="32" height="80" rx="3" fill="url(#candleFill)" />
+                  </g>
+                  <g transform="translate(790 116)">
+                    <line x1="0" y1="60" x2="0" y2="-150" stroke="rgba(106, 176, 255, 0.16)" stroke-width="4" />
+                    <rect x="-16" y="-12" width="32" height="92" rx="3" fill="url(#candleFill)" />
+                  </g>
+                  <g transform="translate(850 78)">
+                    <line x1="0" y1="62" x2="0" y2="-160" stroke="rgba(106, 176, 255, 0.15)" stroke-width="4" />
+                    <rect x="-16" y="-10" width="32" height="100" rx="3" fill="url(#candleFill)" />
+                  </g>
+                </g>
+
+                <g fill="none" stroke="rgba(164, 183, 214, 0.08)" stroke-width="1">
+                  <path d="M0 100 H900" />
+                  <path d="M0 180 H900" />
+                  <path d="M0 260 H900" />
+                  <path d="M0 340 H900" />
+                  <path d="M0 420 H900" />
+                  <path d="M0 500 H900" />
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-kicker">What it does</span>
+            <h2>Built like a trading lab, not a hype machine.</h2>
+            <p class="section-copy">
+              The current focus is on disciplined automation support, strict pre-trade checks and a clear paper trail for every important decision.
+            </p>
+          </div>
+
+          <div class="grid-5">
+            <article class="card reveal delay-1">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19V5" />
+                  <path d="M8 16v-8" />
+                  <path d="M12 12V8" />
+                  <path d="M16 15V4" />
+                  <path d="M20 20V7" />
+                </svg>
+              </div>
+              <h3>Signal scanning</h3>
+              <p>Continuously reviews market conditions to identify setups worth examining further.</p>
+            </article>
+
+            <article class="card reveal delay-2">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3 4 6v6c0 5 4 8 8 9 4-1 8-4 8-9V6l-8-3Z" />
+                  <path d="m9 12 2 2 4-5" />
+                </svg>
+              </div>
+              <h3>Risk controls</h3>
+              <p>Rules are checked before any trade path is considered acceptable for testing.</p>
+            </article>
+
+            <article class="card reveal delay-3">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 7h12" />
+                  <path d="M8 12h12" />
+                  <path d="M8 17h12" />
+                  <path d="M4 7h.01" />
+                  <path d="M4 12h.01" />
+                  <path d="M4 17h.01" />
+                </svg>
+              </div>
+              <h3>Testing workflows</h3>
+              <p>Supports controlled checks, repeatable scenarios and careful validation before any expansion.</p>
+            </article>
+
+            <article class="card reveal delay-4">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2v20" />
+                  <path d="M17 6.5a5 5 0 0 0-5-4 5 5 0 0 0-5 4" />
+                  <path d="M17 17.5a5 5 0 0 1-5 4 5 5 0 0 1-5-4" />
+                  <path d="M7 12h10" />
+                </svg>
+              </div>
+              <h3>Decision logging</h3>
+              <p>Records the reasons behind key actions so outcomes can be traced and reviewed later.</p>
+            </article>
+
+            <article class="card reveal delay-4">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 12a8 8 0 1 1 16 0" />
+                  <path d="M6 12h12" />
+                  <path d="M12 4v16" />
+                  <path d="M9 9h6" />
+                  <path d="M9 15h6" />
+                </svg>
+              </div>
+              <h3>Human oversight</h3>
+              <p>Automation is designed to support, not replace, judgement while the project remains in testing.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="why">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-kicker">Why ClawGauge exists</span>
+            <h2>A more disciplined approach to automation.</h2>
+          </div>
+
+          <div class="grid-2">
+            <div class="panel reveal">
+              <p class="panel-quote">
+                ClawGauge was built to explore a more disciplined approach to crypto trading automation - reducing emotional decision-making, improving trade visibility and enforcing stronger risk controls before capital is committed.
+              </p>
+              <p>
+                The site reflects the current state of the project: a serious technical build with a focus on process, evidence and restraint rather than performance claims.
+              </p>
+            </div>
+
+            <div class="story-panel reveal delay-1">
+              <div class="panel">
+                <div class="metric-list">
+                  <div class="metric">
+                    <strong>Lower noise</strong>
+                    <span>Filter out impulsive, low-quality actions.</span>
+                  </div>
+                  <div class="metric">
+                    <strong>Better visibility</strong>
+                    <span>See why each decision was considered.</span>
+                  </div>
+                  <div class="metric">
+                    <strong>Stronger control</strong>
+                    <span>Keep every test inside explicit guardrails.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="panel">
+                <p>
+                  Nothing here should be read as financial advice, investment advice, a promise of results or a public invitation to invest.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="testing">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-kicker">Private testing</span>
+            <h2>Private testing in progress</h2>
+            <p class="section-copy">
+              ClawGauge is currently in a controlled testing phase. We’re interested in connecting with technical collaborators, early supporters and potential backers who want to follow or support the next stage of development.
+            </p>
+          </div>
+
+          <div class="testing-banner reveal">
+            <strong>This site is for information only and is not a public investment offer.</strong>
+            <p>We are documenting the build, testing the workflow and keeping the risk controls front and centre.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="roadmap">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-kicker">Roadmap</span>
+            <h2>Where the build is heading next</h2>
+          </div>
+
+          <div class="grid-4">
+            <article class="roadmap-card reveal">
+              <span class="phase">Phase 1</span>
+              <h3>Core system development</h3>
+              <p>Finish the internal logic, basic controls and testing scaffolding that support the rest of the project.</p>
+            </article>
+            <article class="roadmap-card reveal delay-1">
+              <span class="phase">Phase 2</span>
+              <h3>Controlled testing and trade validation</h3>
+              <p>Run the system in restricted conditions and verify that the rules behave as expected.</p>
+            </article>
+            <article class="roadmap-card reveal delay-2">
+              <span class="phase">Phase 3</span>
+              <h3>Reporting, risk controls and refinement</h3>
+              <p>Expand logging, improve visibility and tighten the guardrails based on what the tests show.</p>
+            </article>
+            <article class="roadmap-card reveal delay-3">
+              <span class="phase">Phase 4</span>
+              <h3>Broader beta and partner discussions</h3>
+              <p>Open the conversation with the right technical and strategic people once the test phase is stable.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-kicker">Register interest</span>
+            <h2>Contact and interest registration</h2>
+            <p class="section-copy">
+              Use the form below to register interest. If your email app does not open, you can use the direct mailto fallback immediately underneath the form.
+            </p>
+          </div>
+
+          <div class="contact-wrap">
+            <div class="contact-card reveal">
+              <h3>Send a note</h3>
+              <p>
+                This is intentionally lightweight while the project remains in controlled testing. Messages are routed through your email client for now.
+              </p>
+
+              <form id="interest-form">
+                <label>
+                  Name
+                  <input name="name" type="text" autocomplete="name" placeholder="Your name" required />
+                </label>
+                <label>
+                  Email
+                  <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+                </label>
+                <label>
+                  Interest type
+                  <select name="interest_type" required>
+                    <option value="" selected disabled>Select one</option>
+                    <option>Beta follower</option>
+                    <option>Technical collaborator</option>
+                    <option>Potential backer</option>
+                    <option>General enquiry</option>
+                  </select>
+                </label>
+                <label>
+                  Message
+                  <textarea name="message" placeholder="Tell us what you would like to follow up on" required></textarea>
+                </label>
+
+                <div class="form-actions">
+                  <button class="btn btn-primary" type="submit">Open email draft</button>
+                  <a class="btn btn-secondary" href="mailto:hello@clawgauge.com?subject=ClawGauge%20interest">mailto:hello@clawgauge.com</a>
+                </div>
+
+                <p class="form-note">If your browser blocks mailto links, copy the address above into your email client.</p>
+              </form>
+            </div>
+
+            <div class="contact-card reveal delay-1">
+              <h3>Good fit for this stage</h3>
+              <p>We are especially interested in people who want to follow the build in a practical way.</p>
+              <ul class="small-list">
+                <li>Beta followers who want project updates without public marketing claims.</li>
+                <li>Technical collaborators who care about control logic, logging and safety.</li>
+                <li>Potential backers who understand this is a controlled, experimental phase.</li>
+              </ul>
+              <p style="margin-top: 18px;">
+                ClawGauge is not offering guaranteed returns, passive income or public investment terms.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <strong>ClawGauge</strong>
+          <span>Measure the move. Control the risk.</span>
+        </div>
+        <div class="footer-note">
+          Experimental software only. Nothing on this site is financial advice, investment advice or a public offer to invest. Built by JMS Web Design.
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const form = document.getElementById("interest-form");
+
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const name = String(data.get("name") || "").trim();
+      const email = String(data.get("email") || "").trim();
+      const interest = String(data.get("interest_type") || "").trim();
+      const message = String(data.get("message") || "").trim();
+
+      const subject = `ClawGauge interest: ${interest || "General enquiry"}`;
+      const body = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Interest type: ${interest}`,
+        "",
+        message,
+      ].join("\n");
+
+      window.location.href = `mailto:hello@clawgauge.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+  </script>
+</body>
+</html>
