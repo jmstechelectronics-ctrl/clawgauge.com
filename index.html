@@ -127,6 +127,9 @@
     .masthead {
       position: relative;
       overflow: hidden;
+      min-height: clamp(170px, 22vw, 300px);
+      display: flex;
+      align-items: flex-start;
       background: linear-gradient(180deg, rgba(3, 8, 18, 0.12), rgba(4, 12, 24, 0.70));
       border-bottom: 1px solid rgba(132, 175, 255, 0.10);
     }
@@ -136,9 +139,9 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(3, 7, 16, 0.28), rgba(3, 7, 16, 0.66)),
-        url("assets/logo-banner.png") center top / cover no-repeat;
-      opacity: 0.86;
+        linear-gradient(180deg, rgba(3, 7, 16, 0.08), rgba(3, 7, 16, 0.48)),
+        url("assets/logo-banner.png") center center / 100% 100% no-repeat;
+      opacity: 1;
       pointer-events: none;
     }
 
@@ -156,22 +159,23 @@
     .topbar {
       position: sticky;
       top: 0;
+      width: 100%;
       z-index: 50;
       backdrop-filter: blur(18px) saturate(1.15);
-      background: rgba(5, 11, 22, 0.36);
+      background: linear-gradient(90deg, rgba(2, 6, 16, 0.20), rgba(2, 6, 16, 0.74));
       border-bottom: 1px solid rgba(132, 175, 255, 0.10);
     }
 
     .topbar-inner {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       gap: 18px;
       padding: 14px 0;
     }
 
     .brand {
-      display: inline-flex;
+      display: none;
       align-items: center;
       gap: 14px;
       text-decoration: none;
@@ -230,7 +234,7 @@
     .hero {
       position: relative;
       z-index: 1;
-      padding: 24px 0 30px;
+      padding: 30px 0 26px;
     }
 
     .hero-grid {
@@ -238,6 +242,12 @@
       grid-template-columns: 1.03fr 0.97fr;
       gap: 22px;
       align-items: stretch;
+      border-radius: var(--radius-xl);
+      padding: clamp(16px, 2vw, 24px);
+      background: linear-gradient(180deg, rgba(12, 27, 48, 0.90), rgba(7, 15, 29, 0.96));
+      border: 1px solid rgba(145, 189, 255, 0.14);
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
     .hero-copy,
@@ -252,21 +262,18 @@
     }
 
     .hero-copy {
-      border-radius: var(--radius-xl);
+      border-radius: 0;
       padding: clamp(22px, 4vw, 42px);
       position: relative;
       overflow: hidden;
       backdrop-filter: blur(6px);
+      background: transparent;
+      border: 0;
+      box-shadow: none;
     }
 
     .hero-copy::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(440px 220px at 20% 12%, rgba(68, 213, 255, 0.14), transparent 62%),
-        radial-gradient(520px 260px at 100% 0%, rgba(47, 139, 255, 0.16), transparent 58%);
-      pointer-events: none;
+      content: none;
     }
 
     .eyebrow {
@@ -394,12 +401,15 @@
     }
 
     .hero-visual {
-      border-radius: var(--radius-xl);
-      padding: 18px;
+      border-radius: 0;
+      padding: clamp(12px, 2vw, 18px);
       position: relative;
       overflow: hidden;
       min-height: 100%;
       backdrop-filter: blur(6px);
+      background: transparent;
+      border: 0;
+      box-shadow: none;
     }
 
     .hero-visual::before {
@@ -417,12 +427,12 @@
       position: relative;
       z-index: 1;
       height: 100%;
-      min-height: 540px;
+      min-height: 500px;
       border-radius: calc(var(--radius-xl) - 6px);
       overflow: hidden;
       background:
-        linear-gradient(180deg, rgba(7, 15, 29, 0.92), rgba(8, 21, 40, 0.98)),
-        radial-gradient(900px 360px at 50% 100%, rgba(47, 139, 255, 0.18), transparent 62%);
+        linear-gradient(180deg, rgba(5, 12, 24, 0.86), rgba(8, 21, 40, 0.96)),
+        radial-gradient(900px 360px at 50% 100%, rgba(47, 139, 255, 0.22), transparent 62%);
       border: 1px solid rgba(129, 179, 255, 0.16);
     }
 
@@ -450,9 +460,45 @@
 
     .chart-svg {
       width: 100%;
-      height: auto;
+      height: 72%;
       display: block;
       margin-top: 8px;
+    }
+
+    .visual-readouts {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      z-index: 2;
+    }
+
+    .readout {
+      min-height: 76px;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(4, 12, 24, 0.78);
+      border: 1px solid rgba(145, 189, 255, 0.14);
+      box-shadow: inset 0 0 24px rgba(68, 213, 255, 0.04);
+    }
+
+    .readout span {
+      display: block;
+      color: var(--muted-2);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 7px;
+    }
+
+    .readout strong {
+      display: block;
+      color: #eaf6ff;
+      font-size: 1rem;
+      line-height: 1.2;
     }
 
     .section {
@@ -780,9 +826,10 @@
 
     footer {
       margin-top: 26px;
-      padding: 24px 0 42px;
+      padding: 34px 0 42px;
       position: relative;
       overflow: hidden;
+      min-height: 230px;
       border-top: 1px solid rgba(145, 189, 255, 0.12);
       background: linear-gradient(180deg, rgba(3, 8, 18, 0.12), rgba(4, 12, 25, 0.70));
     }
@@ -792,9 +839,9 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(3, 7, 16, 0.30), rgba(3, 7, 16, 0.72)),
-        url("assets/logo-banner.png") center center / cover no-repeat;
-      opacity: 0.28;
+        linear-gradient(90deg, rgba(3, 7, 16, 0.36), rgba(3, 7, 16, 0.80)),
+        url("assets/logo-banner.png") center center / 100% 100% no-repeat;
+      opacity: 0.72;
       pointer-events: none;
     }
 
@@ -813,7 +860,9 @@
       position: relative;
       z-index: 1;
       display: grid;
-      gap: 18px;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: end;
     }
 
     .footer-nav {
@@ -821,6 +870,7 @@
       flex-wrap: wrap;
       gap: 8px;
       align-items: center;
+      justify-content: flex-end;
     }
 
     .footer-nav a {
@@ -842,9 +892,10 @@
 
     .footer-brand {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 12px;
       flex-wrap: wrap;
+      max-width: 560px;
     }
 
     .footer-icon {
@@ -884,8 +935,25 @@
       text-align: left;
     }
 
+    .footer-right {
+      display: grid;
+      gap: 14px;
+      justify-items: end;
+    }
+
+    .social-handle {
+      color: #d8f7ff;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 8px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(68, 213, 255, 0.22);
+      background: rgba(5, 11, 22, 0.40);
+    }
+
     .reveal {
-      animation: rise 0.65s ease both;
+      animation: none;
     }
 
     .delay-1 { animation-delay: 0.08s; }
@@ -915,7 +983,7 @@
         grid-column: 1 / -1;
       }
       .chart-shell {
-        min-height: 470px;
+        min-height: 440px;
       }
       .metric-list {
         grid-template-columns: 1fr;
@@ -925,7 +993,7 @@
     @media (max-width: 760px) {
       .topbar-inner {
         align-items: flex-start;
-        flex-direction: column;
+        justify-content: flex-start;
       }
       .nav {
         justify-content: flex-start;
@@ -952,11 +1020,25 @@
       .chart-shell {
         min-height: 420px;
       }
+      .visual-readouts {
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        grid-template-columns: 1fr;
+        padding: 0 18px 18px;
+      }
       .footer-inner {
+        grid-template-columns: 1fr;
         align-items: flex-start;
       }
       .footer-note {
         text-align: left;
+      }
+      .footer-right,
+      .footer-nav {
+        justify-items: start;
+        justify-content: flex-start;
       }
       h1 {
         font-size: clamp(2.35rem, 14vw, 4rem);
@@ -999,7 +1081,9 @@
           </nav>
         </div>
       </div>
+    </header>
 
+    <main id="content">
         <section class="hero" id="top">
           <div class="container hero-grid">
             <div class="hero-copy reveal">
@@ -1037,8 +1121,9 @@
               <div class="chart-shell">
                 <div class="chart-labels">
                   <span class="pill">Risk-gated</span>
-                  <span class="pill">Test bench</span>
+                  <span class="pill">Active testing</span>
                   <span class="pill">Human oversight</span>
+                  <span class="pill">Decision logged</span>
                 </div>
                 <svg class="chart-svg" viewBox="0 0 900 560" role="img" aria-label="Decorative candlestick chart with blue trend line">
                   <defs>
@@ -1135,13 +1220,28 @@
                     <path d="M0 500 H900" />
                   </g>
                 </svg>
+                <div class="visual-readouts" aria-hidden="true">
+                  <div class="readout">
+                    <span>Risk gate</span>
+                    <strong>Rules checked before execution</strong>
+                  </div>
+                  <div class="readout">
+                    <span>Signal state</span>
+                    <strong>Market setup under review</strong>
+                  </div>
+                  <div class="readout">
+                    <span>Testing mode</span>
+                    <strong>Controlled validation phase</strong>
+                  </div>
+                  <div class="readout">
+                    <span>Audit trail</span>
+                    <strong>Decision logged for review</strong>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
-    </header>
-
-    <main id="content">
       <section class="section" id="features">
         <div class="container">
           <div class="section-head">
@@ -1384,25 +1484,29 @@
       </section>
     </main>
 
-    <footer>
+    <footer id="site-footer">
       <div class="container footer-inner">
-        <nav class="footer-nav" aria-label="Footer">
-          <a href="#features">What it does</a>
-          <a href="#why">Why it exists</a>
-          <a href="#testing">Testing</a>
-          <a href="#roadmap">Roadmap</a>
-          <a href="#contact">Register interest</a>
-        </nav>
         <div class="footer-brand">
           <img class="footer-icon" src="favicon.svg" alt="" aria-hidden="true" />
           <div class="footer-brand-copy">
             <strong>ClawGauge</strong>
             <span>Measure the move. Control the risk.</span>
             <p class="footer-meta">© 2026 ClawGauge. All rights reserved.</p>
+            <p class="footer-note">
+              Experimental software only. Nothing on this site is financial advice, investment advice or a public offer to invest.
+            </p>
           </div>
         </div>
-        <div class="footer-note">
-          Experimental software only. Nothing on this site is financial advice, investment advice or a public offer to invest. Built by JMS Web Design.
+        <div class="footer-right">
+          <nav class="footer-nav" aria-label="Footer">
+            <a href="#features">What it does</a>
+            <a href="#why">Why it exists</a>
+            <a href="#testing">Testing</a>
+            <a href="#roadmap">Roadmap</a>
+            <a href="#contact">Register interest</a>
+          </nav>
+          <a class="social-handle" href="https://x.com/clawgauge" rel="me noopener">X @clawgauge</a>
+          <p class="footer-meta">Built by JMS Web Design.</p>
         </div>
       </div>
     </footer>
