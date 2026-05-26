@@ -546,7 +546,7 @@
     .card-wide {
       grid-column: span 2;
       display: grid;
-      grid-template-columns: 1fr 1fr 1.1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 14px;
       align-items: stretch;
       min-height: 240px;
@@ -562,32 +562,6 @@
     .card-segment + .card-segment {
       padding-left: 12px;
       border-left: 1px solid rgba(145, 189, 255, 0.12);
-    }
-
-    .card-graphic {
-      position: relative;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(145, 189, 255, 0.10);
-      background: rgba(4, 10, 20, 0.55);
-      min-height: 100%;
-    }
-
-    .card-graphic::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(4, 10, 20, 0.16), rgba(4, 10, 20, 0.84)),
-        radial-gradient(300px 160px at 50% 10%, rgba(68, 213, 255, 0.14), transparent 60%);
-      pointer-events: none;
-    }
-
-    .card-graphic img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.92;
     }
 
     .card-icon {
@@ -807,16 +781,63 @@
     footer {
       margin-top: 26px;
       padding: 24px 0 42px;
+      position: relative;
+      overflow: hidden;
       border-top: 1px solid rgba(145, 189, 255, 0.12);
-      background: linear-gradient(180deg, transparent, rgba(4, 12, 25, 0.72));
+      background: linear-gradient(180deg, rgba(3, 8, 18, 0.12), rgba(4, 12, 25, 0.70));
+    }
+
+    footer::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(3, 7, 16, 0.30), rgba(3, 7, 16, 0.72)),
+        url("assets/logo-banner.png") center center / cover no-repeat;
+      opacity: 0.28;
+      pointer-events: none;
+    }
+
+    footer::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(900px 260px at 18% 0%, rgba(68, 213, 255, 0.10), transparent 56%),
+        radial-gradient(820px 220px at 80% 20%, rgba(47, 139, 255, 0.16), transparent 62%);
+      pointer-events: none;
+      mix-blend-mode: screen;
     }
 
     .footer-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 18px;
+    }
+
+    .footer-nav {
       display: flex;
       flex-wrap: wrap;
+      gap: 8px;
       align-items: center;
-      justify-content: space-between;
-      gap: 14px;
+    }
+
+    .footer-nav a {
+      text-decoration: none;
+      color: rgba(235, 243, 255, 0.82);
+      font-size: 0.94rem;
+      padding: 8px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(145, 189, 255, 0.12);
+      background: rgba(5, 11, 22, 0.26);
+    }
+
+    .footer-nav a:hover,
+    .footer-nav a:focus-visible {
+      background: rgba(68, 213, 255, 0.08);
+      border-color: rgba(68, 213, 255, 0.18);
+      outline: none;
     }
 
     .footer-brand {
@@ -860,7 +881,7 @@
 
     .footer-note {
       max-width: 60ch;
-      text-align: right;
+      text-align: left;
     }
 
     .reveal {
@@ -892,11 +913,6 @@
       }
       .card-wide {
         grid-column: 1 / -1;
-        grid-template-columns: 1fr 1fr;
-      }
-      .card-graphic {
-        grid-column: 1 / -1;
-        min-height: 180px;
       }
       .chart-shell {
         min-height: 470px;
@@ -969,7 +985,7 @@
 
   <div class="shell">
     <header class="masthead">
-      <header class="topbar">
+      <div class="topbar">
         <div class="container topbar-inner">
           <a class="brand" href="#top" aria-label="ClawGauge home">
             <img src="assets/logo-banner.png" alt="ClawGauge logo" />
@@ -982,7 +998,7 @@
             <a href="#contact">Register interest</a>
           </nav>
         </div>
-      </header>
+      </div>
 
         <section class="hero" id="top">
           <div class="container hero-grid">
@@ -1162,10 +1178,6 @@
                 <h3>Risk controls</h3>
                 <p>Rules are checked before any trade path is considered acceptable for testing.</p>
               </div>
-
-              <div class="card-graphic" aria-hidden="true">
-                <img src="assets/bg.png" alt="" />
-              </div>
             </article>
 
             <article class="card reveal delay-2">
@@ -1312,7 +1324,7 @@
             <span class="section-kicker">Register interest</span>
             <h2>Contact and interest registration</h2>
             <p class="section-copy">
-              Use the form below to register interest. If your email app does not open, you can use the direct mailto fallback immediately underneath the form.
+              Use the form below to register interest. The form is the only contact path on this page.
             </p>
           </div>
 
@@ -1348,10 +1360,10 @@
                 </label>
 
                 <div class="form-actions">
-                  <button class="btn btn-primary" type="submit">Open email draft</button>
+                  <button class="btn btn-primary" type="submit">Send Inquiry</button>
                 </div>
 
-                <p class="form-note">If your browser blocks mailto links, the button will not send the message.</p>
+                <p class="form-note">Submitting opens your email client with the details prepared for sending.</p>
               </form>
             </div>
 
@@ -1374,6 +1386,13 @@
 
     <footer>
       <div class="container footer-inner">
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="#features">What it does</a>
+          <a href="#why">Why it exists</a>
+          <a href="#testing">Testing</a>
+          <a href="#roadmap">Roadmap</a>
+          <a href="#contact">Register interest</a>
+        </nav>
         <div class="footer-brand">
           <img class="footer-icon" src="favicon.svg" alt="" aria-hidden="true" />
           <div class="footer-brand-copy">
