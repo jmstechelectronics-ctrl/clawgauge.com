@@ -15,12 +15,12 @@
   <meta property="og:title" content="ClawGauge | AI-assisted crypto trading automation." />
   <meta property="og:description" content="ClawGauge monitors market conditions, risk signals and trade opportunities to support disciplined automated decision-making." />
   <meta property="og:url" content="https://clawgauge.com/" />
-  <meta property="og:image" content="https://clawgauge.com/assets/logo-nobg.png" />
+  <meta property="og:image" content="https://clawgauge.com/assets/header-logo.png" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="ClawGauge | AI-assisted crypto trading automation." />
   <meta name="twitter:description" content="ClawGauge monitors market conditions, risk signals and trade opportunities to support disciplined automated decision-making." />
-  <meta name="twitter:image" content="https://clawgauge.com/assets/logo-nobg.png" />
+  <meta name="twitter:image" content="https://clawgauge.com/assets/header-logo.png" />
 
   <style>
     :root {
@@ -266,9 +266,9 @@
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
-      gap: 18px;
-      align-items: stretch;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+      align-items: start;
     }
 
     .command-copy {
@@ -493,7 +493,108 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-bottom: 18px;
+      margin-bottom: 0;
+    }
+
+    .hero-ticker {
+      position: relative;
+      z-index: 1;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 6px 8px 6px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(129, 179, 255, 0.12);
+      background:
+        linear-gradient(180deg, rgba(5, 12, 24, 0.84), rgba(4, 12, 24, 0.96)),
+        radial-gradient(500px 120px at 20% 0%, rgba(68, 213, 255, 0.08), transparent 70%);
+      overflow: hidden;
+    }
+
+    .hero-ticker::before,
+    .hero-ticker::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 32px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .hero-ticker::before {
+      left: 0;
+      background: linear-gradient(90deg, rgba(4, 12, 24, 0.96), transparent);
+    }
+
+    .hero-ticker::after {
+      right: 0;
+      background: linear-gradient(270deg, rgba(4, 12, 24, 0.96), transparent);
+    }
+
+    .hero-ticker .feed-label {
+      margin: 0;
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+
+    .hero-ticker .feed-viewport {
+      flex: 1;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    .hero-ticker .feed-track {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: max-content;
+      will-change: transform;
+      animation: feedTicker 36s linear infinite;
+    }
+
+    .hero-ticker .feed-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 34px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(145, 189, 255, 0.12);
+      background: rgba(7, 16, 31, 0.72);
+      color: #ebf3ff;
+      font-size: 0.88rem;
+      white-space: nowrap;
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+
+    .hero-ticker .feed-item.is-active {
+      background: rgba(68, 213, 255, 0.10);
+      border-color: rgba(68, 213, 255, 0.24);
+      box-shadow: 0 0 0 1px rgba(68, 213, 255, 0.08) inset;
+    }
+
+    .hero-ticker .feed-state {
+      min-width: 72px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(68, 213, 255, 0.10);
+      border: 1px solid rgba(68, 213, 255, 0.18);
+      color: #d7f7ff;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    .hero-ticker .feed-text {
+      color: rgba(235, 243, 255, 0.9);
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .btn {
@@ -628,32 +729,6 @@
       color: var(--muted);
       margin-bottom: 0;
       max-width: 32ch;
-    }
-
-    .metrics-copy {
-      display: grid;
-      gap: 12px;
-      margin-top: 18px;
-      max-width: 72ch;
-      color: rgba(235, 243, 255, 0.84);
-      line-height: 1.65;
-    }
-
-    .metrics-copy.panel {
-      background: rgba(7, 16, 31, 0.72);
-      border: 1px solid rgba(130, 178, 255, 0.12);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
-    }
-
-    .metrics-copy .kicker {
-      display: inline-flex;
-      width: fit-content;
-      margin-bottom: 2px;
-    }
-
-    .metrics-copy strong {
-      color: #f4fbff;
-      font-weight: 700;
     }
 
     .grid-2 {
@@ -1121,6 +1196,15 @@
       }
     }
 
+    @keyframes feedTicker {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
     @media (max-width: 1100px) {
       .hero-grid,
       .contact-wrap,
@@ -1235,6 +1319,10 @@
       textarea {
         transition: none;
       }
+      .hero-ticker .feed-track {
+        animation: none;
+        transform: none;
+      }
     }
   </style>
 </head>
@@ -1246,7 +1334,7 @@
       <div class="topbar">
         <div class="container topbar-inner">
           <a class="brand" href="#top" aria-label="ClawGauge home">
-            <img class="brand-logo" src="assets/logo-nobg.png" alt="ClawGauge" />
+            <img class="brand-logo" src="assets/header-logo.png" alt="ClawGauge" />
           </a>
           <nav class="nav" aria-label="Primary">
             <a href="#features">What it does</a>
@@ -1275,35 +1363,34 @@
                     <span>The edge is not just the signal. It is the discipline around it.</span>
                   </div>
                   <div class="hero-actions">
-                    <a class="btn btn-primary" href="#system">Follow the build</a>
+                    <a class="btn btn-primary" href="https://x.com/clawgauge">Follow the build</a>
                     <a class="btn btn-secondary" href="#contact">Register interest</a>
                   </div>
-                </div>
 
-                <div class="command-visual" aria-hidden="true">
-                  <div class="status-chips">
-                    <span class="status-chip">Risk gate active</span>
-                    <span class="status-chip">Controlled test</span>
-                    <span class="status-chip">Decision logging</span>
-                    <span class="status-chip">Human oversight</span>
-                  </div>
-
-                  <div class="visual-stage">
-                    <div class="decision-feed">
-                      <span class="feed-label">Decision feed</span>
-                      <div class="feed-viewport">
-                        <div class="feed-track" id="decision-feed-track">
-                          <div class="feed-item is-active"><span class="feed-state">HOLD</span><span class="feed-text">no eligible setup</span></div>
-                          <div class="feed-item"><span class="feed-state">BLOCK</span><span class="feed-text">risk gate triggered</span></div>
-                          <div class="feed-item"><span class="feed-state">SCAN</span><span class="feed-text">market check complete</span></div>
-                          <div class="feed-item"><span class="feed-state">LOGGED</span><span class="feed-text">decision recorded</span></div>
-                          <div class="feed-item"><span class="feed-state">REVIEW</span><span class="feed-text">controlled test mode</span></div>
-                          <div class="feed-item"><span class="feed-state">HOLD</span><span class="feed-text">no eligible setup</span></div>
-                          <div class="feed-item"><span class="feed-state">BLOCK</span><span class="feed-text">risk gate triggered</span></div>
-                          <div class="feed-item"><span class="feed-state">SCAN</span><span class="feed-text">market check complete</span></div>
-                          <div class="feed-item"><span class="feed-state">LOGGED</span><span class="feed-text">decision recorded</span></div>
-                          <div class="feed-item"><span class="feed-state">REVIEW</span><span class="feed-text">controlled test mode</span></div>
-                        </div>
+                  <div class="hero-ticker" aria-hidden="true">
+                    <span class="feed-label">Decision feed</span>
+                    <div class="feed-viewport">
+                      <div class="feed-track" id="decision-feed-track">
+                        <div class="feed-item is-active"><span class="feed-state">HOLD</span><span class="feed-text">no eligible setup</span></div>
+                        <div class="feed-item"><span class="feed-state">BLOCK</span><span class="feed-text">risk gate triggered</span></div>
+                        <div class="feed-item"><span class="feed-state">SCAN</span><span class="feed-text">market check complete</span></div>
+                        <div class="feed-item"><span class="feed-state">LOGGED</span><span class="feed-text">decision recorded</span></div>
+                        <div class="feed-item"><span class="feed-state">REVIEW</span><span class="feed-text">controlled test mode</span></div>
+                        <div class="feed-item"><span class="feed-state">HOLD</span><span class="feed-text">no eligible setup</span></div>
+                        <div class="feed-item"><span class="feed-state">BLOCK</span><span class="feed-text">risk gate triggered</span></div>
+                        <div class="feed-item"><span class="feed-state">SCAN</span><span class="feed-text">market check complete</span></div>
+                        <div class="feed-item"><span class="feed-state">LOGGED</span><span class="feed-text">decision recorded</span></div>
+                        <div class="feed-item"><span class="feed-state">REVIEW</span><span class="feed-text">controlled test mode</span></div>
+                        <div class="feed-item is-active"><span class="feed-state">HOLD</span><span class="feed-text">no eligible setup</span></div>
+                        <div class="feed-item"><span class="feed-state">BLOCK</span><span class="feed-text">risk gate triggered</span></div>
+                        <div class="feed-item"><span class="feed-state">SCAN</span><span class="feed-text">market check complete</span></div>
+                        <div class="feed-item"><span class="feed-state">LOGGED</span><span class="feed-text">decision recorded</span></div>
+                        <div class="feed-item"><span class="feed-state">REVIEW</span><span class="feed-text">controlled test mode</span></div>
+                        <div class="feed-item"><span class="feed-state">HOLD</span><span class="feed-text">no eligible setup</span></div>
+                        <div class="feed-item"><span class="feed-state">BLOCK</span><span class="feed-text">risk gate triggered</span></div>
+                        <div class="feed-item"><span class="feed-state">SCAN</span><span class="feed-text">market check complete</span></div>
+                        <div class="feed-item"><span class="feed-state">LOGGED</span><span class="feed-text">decision recorded</span></div>
+                        <div class="feed-item"><span class="feed-state">REVIEW</span><span class="feed-text">controlled test mode</span></div>
                       </div>
                     </div>
                   </div>
@@ -1377,11 +1464,6 @@
             </article>
           </div>
 
-          <div class="metrics-copy panel reveal delay-5">
-            <span class="kicker">Why the system stays selective</span>
-            <p><strong>ClawGauge is not being built as a trigger-happy trading bot.</strong> Across the current test window, the system has logged more than 24,800 decision events, and the overwhelming majority of those outcomes are hold, block, skip or reject calls.</p>
-            <p><strong>A trading system that logs the why - not just the buy.</strong> The goal is not constant action. The goal is controlled action: scan the market, check the conditions, reject weak setups, log the reason and only act when the rules allow it.</p>
-          </div>
         </div>
       </section>
       <section class="section" id="features">
@@ -1605,7 +1687,7 @@
     <footer id="site-footer">
       <div class="container footer-inner">
         <div class="footer-brand">
-          <img class="footer-icon" src="assets/logo-nobg.png" alt="ClawGauge" />
+          <img class="footer-icon" src="assets/header-logo.png" alt="ClawGauge" />
           <div class="footer-brand-copy">
             <strong>ClawGauge</strong>
             <span>Measure the move. Control the risk.</span>
