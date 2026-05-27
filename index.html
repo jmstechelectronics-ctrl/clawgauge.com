@@ -170,50 +170,16 @@
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
       text-decoration: none;
       min-width: 0;
-      color: #f1f7ff;
-      font-weight: 800;
-      font-size: 1.1rem;
-      letter-spacing: 0;
     }
 
-    .brand img {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
+    .brand-logo {
+      width: clamp(210px, 22vw, 310px);
+      height: auto;
+      max-height: 58px;
+      object-fit: contain;
       filter: none;
-    }
-
-    .brand span {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 0;
-      white-space: nowrap;
-    }
-
-    .brand b {
-      color: var(--cyan);
-      font-weight: 800;
-    }
-
-    .brand-mark {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .brand-mark strong {
-      font-size: 0.94rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(235, 243, 255, 0.92);
-    }
-
-    .brand-mark span {
-      color: var(--muted);
-      font-size: 0.84rem;
     }
 
     .nav {
@@ -1148,6 +1114,10 @@
       .nav {
         justify-content: flex-start;
       }
+      .brand-logo {
+        width: min(78vw, 260px);
+        max-height: 48px;
+      }
       .hero {
         padding-top: 24px;
       }
@@ -1238,8 +1208,7 @@
       <div class="topbar">
         <div class="container topbar-inner">
           <a class="brand" href="#top" aria-label="ClawGauge home">
-            <img src="favicon.svg" alt="" aria-hidden="true" />
-            <span>Claw<b>Gauge</b></span>
+            <img class="brand-logo" src="assets/logo-banner.png" alt="ClawGauge" />
           </a>
           <nav class="nav" aria-label="Primary">
             <a href="#features">What it does</a>
