@@ -327,6 +327,20 @@
       margin-bottom: 22px;
     }
 
+    .hero-lines {
+      display: grid;
+      gap: 6px;
+      margin: 0 0 16px;
+      color: #d8efff;
+      font-size: 0.95rem;
+      max-width: 58ch;
+    }
+
+    .hero-lines strong {
+      color: #f0f7ff;
+      font-weight: 700;
+    }
+
     .hero-actions {
       position: relative;
       z-index: 1;
@@ -516,6 +530,10 @@
       padding: 26px 0 8px;
     }
 
+    .section-tight {
+      padding-top: 18px;
+    }
+
     .section-head {
       display: grid;
       gap: 10px;
@@ -548,6 +566,64 @@
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 14px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .metric-card {
+      min-height: 178px;
+      display: grid;
+      align-content: start;
+      gap: 8px;
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(12, 27, 48, 0.90), rgba(7, 15, 29, 0.96));
+      border: 1px solid rgba(145, 189, 255, 0.14);
+      box-shadow: var(--shadow);
+    }
+
+    .metric-card:nth-child(1),
+    .metric-card:nth-child(2),
+    .metric-card:nth-child(3) {
+      min-height: 170px;
+    }
+
+    .metric-card .kicker {
+      color: #c2dbff;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 700;
+    }
+
+    .metric-card strong {
+      font-size: clamp(1.3rem, 2vw, 1.9rem);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .metric-card p {
+      color: var(--muted);
+      margin-bottom: 0;
+      max-width: 32ch;
+    }
+
+    .metrics-copy {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+      max-width: 72ch;
+      color: rgba(235, 243, 255, 0.84);
+      line-height: 1.65;
+    }
+
+    .metrics-copy strong {
+      color: #f4fbff;
+      font-weight: 700;
     }
 
     .grid-2 {
@@ -601,12 +677,23 @@
     }
 
     .card-wide {
-      grid-column: span 2;
+      grid-column: span 3;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
       align-items: stretch;
       min-height: 240px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .feature-grid .card {
+      min-height: 230px;
     }
 
     .card-segment {
@@ -880,18 +967,19 @@
 
     .footer-nav {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+      flex-wrap: nowrap;
+      gap: 6px;
       align-items: center;
       justify-content: flex-end;
-      max-width: 520px;
+      max-width: 100%;
+      white-space: nowrap;
     }
 
     .footer-nav a {
       text-decoration: none;
       color: rgba(235, 243, 255, 0.82);
       font-size: 0.94rem;
-      padding: 8px 11px;
+      padding: 7px 10px;
       border-radius: 999px;
       border: 1px solid rgba(145, 189, 255, 0.12);
       background: rgba(5, 11, 22, 0.26);
@@ -952,6 +1040,7 @@
       display: grid;
       gap: 12px;
       justify-items: end;
+      align-content: start;
     }
 
     .social-handle {
@@ -989,8 +1078,16 @@
       .hero-grid,
       .contact-wrap,
       .grid-4,
+      .metrics-grid,
       .grid-2 {
         grid-template-columns: 1fr 1fr;
+      }
+      .feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .feature-grid .card,
+      .feature-grid .card-wide {
+        grid-column: auto;
       }
       .card-wide {
         grid-column: 1 / -1;
@@ -1021,9 +1118,16 @@
       .hero-grid,
       .contact-wrap,
       .grid-4,
+      .metrics-grid,
       .grid-2,
       .hero-micro {
         grid-template-columns: 1fr;
+      }
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+      .feature-grid .card {
+        grid-column: auto;
       }
       .card-wide {
         grid-template-columns: 1fr;
@@ -1056,6 +1160,10 @@
       .footer-nav {
         justify-items: start;
         justify-content: flex-start;
+      }
+      .footer-nav {
+        flex-wrap: wrap;
+        white-space: normal;
       }
       footer::before,
       .masthead::before {
@@ -1116,13 +1224,17 @@
           <div class="container hero-grid">
             <div class="hero-copy reveal">
               <span class="eyebrow">Private build / Active testing</span>
-              <h1>AI-assisted crypto trading automation, under active testing.</h1>
+              <h1>Measure the move. Control the risk. Automate the discipline.</h1>
               <p class="lead">
-                ClawGauge monitors market conditions, risk signals and trade opportunities to support disciplined automated decision-making.
+                ClawGauge is an AI-assisted crypto trading automation project built to scan market conditions, apply risk gates and log every decision before execution.
               </p>
+              <div class="hero-lines">
+                <strong>Built to reject more than it trades.</strong>
+                <span>The edge is not just the signal. It is the discipline around it.</span>
+              </div>
               <div class="hero-actions">
-                <a class="btn btn-primary" href="#contact">Register interest</a>
-                <a class="btn btn-secondary" href="#testing">View project status</a>
+                <a class="btn btn-primary" href="#testing">Follow the build</a>
+                <a class="btn btn-secondary" href="#contact">Register interest</a>
               </div>
 
               <div class="hero-micro">
@@ -1141,7 +1253,7 @@
               </div>
 
               <p class="disclaimer">
-                ClawGauge is experimental software. Nothing on this site is financial advice, investment advice or a public offer to invest. Crypto assets are volatile and may result in loss.
+                Private testing in progress. No financial advice. No guaranteed returns. No public investment offer.
               </p>
             </div>
 
@@ -1270,6 +1382,56 @@
             </div>
           </div>
         </section>
+      <section class="section section-tight" id="system">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-kicker">System under test</span>
+            <h2>Real operational test-bench volume, not performance theater.</h2>
+            <p class="section-copy">
+              Public-safe operational metrics from the current development window.
+            </p>
+          </div>
+
+          <div class="metrics-grid">
+            <article class="metric-card reveal">
+              <span class="kicker">Controlled test data</span>
+              <strong>558+ hrs</strong>
+              <p>Collected across a 23+ day development window.</p>
+            </article>
+            <article class="metric-card reveal delay-1">
+              <span class="kicker">Market-check events</span>
+              <strong>62,000+</strong>
+              <p>Ticks, candidates, quotes and depth checks captured across the test bench.</p>
+            </article>
+            <article class="metric-card reveal delay-2">
+              <span class="kicker">Logged decisions</span>
+              <strong>24,800+</strong>
+              <p>Hold, block, buy, sell, skip and reject outcomes recorded for review.</p>
+            </article>
+            <article class="metric-card reveal delay-3">
+              <span class="kicker">Block decisions</span>
+              <strong>1,257</strong>
+              <p>Weak setups blocked before action is allowed through the gate.</p>
+            </article>
+            <article class="metric-card reveal delay-4">
+              <span class="kicker">Assets detected</span>
+              <strong>41</strong>
+              <p>Market activity tracked across a broad crypto watchlist.</p>
+            </article>
+            <article class="metric-card reveal delay-4">
+              <span class="kicker">Risk-control logs</span>
+              <strong>168,000+</strong>
+              <p>Spread, depth, liquidity, cooldown and stop-related guardrails are central to the system.</p>
+            </article>
+          </div>
+
+          <div class="metrics-copy">
+            <p><strong>ClawGauge is not being built as a trigger-happy trading bot.</strong> Across the current test window, the system has logged more than 24,800 decision events with the overwhelming majority resulting in hold, block, skip or reject outcomes.</p>
+            <p>A trading system that logs the why - not just the buy.</p>
+            <p>The goal is not constant action. The goal is controlled action: scan the market, check the conditions, reject weak setups, log the reason and only act when the rules allow it.</p>
+          </div>
+        </div>
+      </section>
       <section class="section" id="features">
         <div class="container">
           <div class="section-head">
@@ -1280,7 +1442,7 @@
             </p>
           </div>
 
-          <div class="grid-4">
+          <div class="feature-grid">
             <article class="card card-wide reveal delay-1">
               <div class="card-segment">
                 <div class="card-icon" aria-hidden="true">
@@ -1521,7 +1683,7 @@
             <span>Measure the move. Control the risk.</span>
             <p class="footer-meta">© 2026 ClawGauge. All rights reserved.</p>
             <p class="footer-note">
-              Experimental software only. Nothing on this site is financial advice, investment advice or a public offer to invest.
+              Private testing in progress. No financial advice. No guaranteed returns. No public investment offer.
             </p>
           </div>
         </div>
