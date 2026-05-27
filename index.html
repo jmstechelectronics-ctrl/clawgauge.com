@@ -623,10 +623,22 @@
     .metrics-copy {
       display: grid;
       gap: 12px;
-      margin-top: 16px;
+      margin-top: 18px;
       max-width: 72ch;
       color: rgba(235, 243, 255, 0.84);
       line-height: 1.65;
+    }
+
+    .metrics-copy.panel {
+      background: rgba(7, 16, 31, 0.72);
+      border: 1px solid rgba(130, 178, 255, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    }
+
+    .metrics-copy .kicker {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 2px;
     }
 
     .metrics-copy strong {
@@ -1353,7 +1365,8 @@
             </article>
           </div>
 
-          <div class="metrics-copy">
+          <div class="metrics-copy panel reveal delay-5">
+            <span class="kicker">Why the system stays selective</span>
             <p><strong>ClawGauge is not being built as a trigger-happy trading bot.</strong> Across the current test window, the system has logged more than 24,800 decision events, and the overwhelming majority of those outcomes are hold, block, skip or reject calls.</p>
             <p><strong>A trading system that logs the why - not just the buy.</strong> The goal is not constant action. The goal is controlled action: scan the market, check the conditions, reject weak setups, log the reason and only act when the rules allow it.</p>
           </div>
