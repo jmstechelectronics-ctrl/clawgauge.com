@@ -136,9 +136,9 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(90deg, rgba(3, 7, 16, 0.94), rgba(3, 7, 16, 0.70), rgba(3, 7, 16, 0.88)),
-        url("assets/logo-banner.png") right center / auto 100% no-repeat;
-      opacity: 0.58;
+        radial-gradient(700px 220px at 12% 0%, rgba(68, 213, 255, 0.08), transparent 62%),
+        radial-gradient(640px 240px at 86% 0%, rgba(47, 139, 255, 0.08), transparent 64%),
+        linear-gradient(180deg, rgba(4, 12, 24, 0.16), rgba(4, 12, 24, 0.02));
       pointer-events: none;
     }
 
@@ -155,9 +155,7 @@
       position: relative;
       width: 100%;
       z-index: 50;
-      background:
-        linear-gradient(180deg, rgba(2, 6, 16, 0.64), rgba(2, 6, 16, 0.26)),
-        url("assets/logo-banner.png") center center / 100% 100% no-repeat;
+      background: linear-gradient(180deg, rgba(2, 6, 16, 0.78), rgba(2, 6, 16, 0.56));
       border-bottom: 1px solid rgba(132, 175, 255, 0.10);
     }
 
@@ -165,7 +163,9 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(2, 6, 16, 0.42), rgba(2, 6, 16, 0.18), rgba(2, 6, 16, 0.40));
+      background:
+        linear-gradient(90deg, rgba(2, 6, 16, 0.52), rgba(2, 6, 16, 0.26), rgba(2, 6, 16, 0.52)),
+        radial-gradient(420px 80px at 18% 50%, rgba(68, 213, 255, 0.08), transparent 72%);
       pointer-events: none;
     }
 
@@ -174,8 +174,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      min-height: 96px;
-      padding: 14px 0;
+      min-height: 76px;
+      padding: 10px 0;
     }
 
     .brand {
@@ -188,7 +188,11 @@
     }
 
     .brand-logo {
-      display: none;
+      display: block;
+      width: min(38vw, 260px);
+      max-width: 100%;
+      height: auto;
+      max-height: 54px;
     }
 
     .nav {
@@ -1115,19 +1119,19 @@
 
     @media (max-width: 760px) {
       .topbar-inner {
-        align-items: flex-start;
-        justify-content: flex-start;
-        flex-direction: column;
-        gap: 12px;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        gap: 10px;
         min-height: 0;
         padding: 12px 0 14px;
       }
       .nav {
-        justify-content: flex-start;
+        justify-content: flex-end;
       }
       .brand-logo {
-        width: min(78vw, 260px);
-        max-height: 48px;
+        width: min(46vw, 220px);
+        max-height: 44px;
       }
       .hero {
         padding-top: 24px;
@@ -1219,7 +1223,7 @@
       <div class="topbar">
         <div class="container topbar-inner">
           <a class="brand" href="#top" aria-label="ClawGauge home">
-            <img class="brand-logo" src="assets/logo-banner.png" alt="ClawGauge" />
+            <img class="brand-logo" src="assets/logo.png" alt="ClawGauge" />
           </a>
           <nav class="nav" aria-label="Primary">
             <a href="#features">What it does</a>
