@@ -987,14 +987,15 @@
     }
 
     .footer-icon {
-      width: 44px;
-      height: 44px;
+      width: min(42vw, 190px);
+      max-width: 100%;
+      height: auto;
       flex: 0 0 auto;
-      border-radius: 12px;
-      padding: 6px;
-      background: rgba(7, 16, 31, 0.82);
-      border: 1px solid rgba(145, 189, 255, 0.12);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
     }
 
     .footer-brand-copy {
@@ -1579,7 +1580,7 @@
     <footer id="site-footer">
       <div class="container footer-inner">
         <div class="footer-brand">
-          <img class="footer-icon" src="favicon.svg" alt="" aria-hidden="true" />
+          <img class="footer-icon" src="assets/logo.png" alt="ClawGauge" />
           <div class="footer-brand-copy">
             <strong>ClawGauge</strong>
             <span>Measure the move. Control the risk.</span>
