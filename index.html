@@ -371,6 +371,10 @@
       inset: 64px 18px 176px;
       border-radius: 24px;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 14px;
       background:
         linear-gradient(180deg, rgba(5, 12, 24, 0.34), rgba(8, 21, 40, 0.55)),
         radial-gradient(840px 300px at 50% 100%, rgba(47, 139, 255, 0.12), transparent 58%);
@@ -394,10 +398,10 @@
     }
 
     .chart-svg {
-      position: absolute;
-      inset: 0;
+      position: relative;
       width: 100%;
-      height: 100%;
+      flex: 1 1 auto;
+      min-height: 280px;
       display: block;
       z-index: 0;
     }
@@ -405,7 +409,7 @@
     .decision-feed {
       position: relative;
       z-index: 2;
-      margin: auto 0 0;
+      margin-top: auto;
       padding: 14px;
       background: linear-gradient(180deg, rgba(4, 12, 24, 0.76), rgba(4, 12, 24, 0.92));
       border-top: 1px solid rgba(145, 189, 255, 0.12);
@@ -1918,7 +1922,7 @@
         return;
       }
 
-      const duration = 700;
+      const duration = 450;
       const start = performance.now();
 
       const tick = (now) => {
@@ -1940,7 +1944,7 @@
         return;
       }
 
-      window.setTimeout(() => animateCount(node), index * 40);
+      window.setTimeout(() => animateCount(node), index * 20);
     });
 
     form?.addEventListener("submit", (event) => {
