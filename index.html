@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="ClawGauge is an experimental crypto trading automation project under active testing. It focuses on market scanning, risk controls, decision logging and human oversight." />
+  <meta name="description" content="ClawGauge is a private AI-assisted crypto trading automation project focused on market scanning, risk controls, decision logging and human oversight." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#07101f" />
   <link rel="canonical" href="https://clawgauge.com/" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <title>ClawGauge | AI-assisted crypto trading automation, under active testing.</title>
+  <title>ClawGauge | AI-assisted crypto trading automation.</title>
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="ClawGauge" />
-  <meta property="og:title" content="ClawGauge | AI-assisted crypto trading automation, under active testing." />
+  <meta property="og:title" content="ClawGauge | AI-assisted crypto trading automation." />
   <meta property="og:description" content="ClawGauge monitors market conditions, risk signals and trade opportunities to support disciplined automated decision-making." />
   <meta property="og:url" content="https://clawgauge.com/" />
   <meta property="og:image" content="https://clawgauge.com/assets/logo-banner.png" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="ClawGauge | AI-assisted crypto trading automation, under active testing." />
+  <meta name="twitter:title" content="ClawGauge | AI-assisted crypto trading automation." />
   <meta name="twitter:description" content="ClawGauge monitors market conditions, risk signals and trade opportunities to support disciplined automated decision-making." />
   <meta name="twitter:image" content="https://clawgauge.com/assets/logo-banner.png" />
 
@@ -367,13 +367,11 @@
     .status-chip:nth-child(4) { animation-delay: 0.9s; }
 
     .visual-stage {
-      position: absolute;
-      inset: 64px 18px 176px;
+      position: relative;
+      margin: 16px 18px 0;
       border-radius: 24px;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+      display: block;
       padding: 14px;
       background:
         linear-gradient(180deg, rgba(5, 12, 24, 0.34), rgba(8, 21, 40, 0.55)),
@@ -382,34 +380,10 @@
       box-shadow: inset 0 0 40px rgba(68, 213, 255, 0.03);
     }
 
-    .scan-beam {
-      position: absolute;
-      top: -12%;
-      bottom: -12%;
-      width: 120px;
-      left: -20%;
-      z-index: 1;
-      background: linear-gradient(90deg, transparent, rgba(68, 213, 255, 0.14), rgba(68, 213, 255, 0.52), rgba(68, 213, 255, 0.14), transparent);
-      filter: blur(8px);
-      mix-blend-mode: screen;
-      opacity: 0.82;
-      transform: skewX(-10deg);
-      animation: scanSweep 6.5s linear infinite;
-    }
-
-    .chart-svg {
-      position: relative;
-      width: 100%;
-      flex: 1 1 auto;
-      min-height: 280px;
-      display: block;
-      z-index: 0;
-    }
-
     .decision-feed {
       position: relative;
       z-index: 2;
-      margin-top: auto;
+      margin-top: 0;
       padding: 14px;
       background: linear-gradient(180deg, rgba(4, 12, 24, 0.76), rgba(4, 12, 24, 0.92));
       border-top: 1px solid rgba(145, 189, 255, 0.12);
@@ -579,35 +553,6 @@
       border-radius: 14px;
     }
 
-    .scroll-trigger {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      width: fit-content;
-      color: #d8f7ff;
-      text-decoration: none;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-    }
-
-    .scroll-trigger:hover,
-    .scroll-trigger:focus-visible {
-      color: #ffffff;
-      outline: none;
-    }
-
-    .scroll-chevron {
-      width: 30px;
-      height: 30px;
-      display: inline-grid;
-      place-items: center;
-      border-radius: 50%;
-      border: 1px solid rgba(68, 213, 255, 0.24);
-      background: rgba(5, 11, 22, 0.38);
-      box-shadow: 0 0 0 1px rgba(68, 213, 255, 0.06) inset;
-      animation: bob 1.8s ease-in-out infinite;
-    }
-
     .section {
       padding: 26px 0 8px;
     }
@@ -758,36 +703,15 @@
       min-height: 190px;
     }
 
-    .card-wide {
-      grid-column: span 3;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      align-items: stretch;
-      min-height: 240px;
-    }
-
     .feature-grid {
       display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 14px;
       align-items: stretch;
     }
 
     .feature-grid .card {
-      min-height: 230px;
-    }
-
-    .card-segment {
-      display: grid;
-      align-content: start;
-      gap: 8px;
-      padding-right: 6px;
-    }
-
-    .card-segment + .card-segment {
-      padding-left: 12px;
-      border-left: 1px solid rgba(145, 189, 255, 0.12);
+      min-height: 220px;
     }
 
     .card-icon {
@@ -1193,15 +1117,6 @@
       }
     }
 
-    @keyframes bob {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(3px);
-      }
-    }
-
     @media (max-width: 1100px) {
       .hero-grid,
       .contact-wrap,
@@ -1212,13 +1127,6 @@
       }
       .feature-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .feature-grid .card,
-      .feature-grid .card-wide {
-        grid-column: auto;
-      }
-      .card-wide {
-        grid-column: 1 / -1;
       }
       .chart-shell {
         min-height: 440px;
@@ -1257,9 +1165,6 @@
       .command-visual {
         min-height: 500px;
       }
-      .visual-stage {
-        inset: 64px 14px 162px;
-      }
       .hero-metrics {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1272,26 +1177,6 @@
       }
       .feature-grid .card {
         grid-column: auto;
-      }
-      .card-wide {
-        grid-template-columns: 1fr;
-      }
-      .card-segment + .card-segment {
-        padding-left: 0;
-        border-left: none;
-        padding-top: 10px;
-        border-top: 1px solid rgba(145, 189, 255, 0.12);
-      }
-      .chart-shell {
-        min-height: 420px;
-      }
-      .visual-readouts {
-        position: relative;
-        left: auto;
-        right: auto;
-        bottom: auto;
-        grid-template-columns: 1fr;
-        padding: 0 18px 18px;
       }
       .footer-inner {
         grid-template-columns: 1fr;
@@ -1309,16 +1194,6 @@
         flex-wrap: wrap;
         white-space: normal;
       }
-      footer::before,
-      .masthead::before {
-        background:
-          linear-gradient(90deg, rgba(3, 7, 16, 0.92), rgba(3, 7, 16, 0.76)),
-          url("assets/logo-banner.png") center center / auto 100% no-repeat;
-      }
-      footer::before {
-        left: 0;
-        opacity: 0.12;
-      }
       h1 {
         font-size: clamp(2.35rem, 14vw, 4rem);
       }
@@ -1330,9 +1205,6 @@
       }
       .command-visual {
         min-height: 460px;
-      }
-      .visual-stage {
-        inset: 64px 12px 150px;
       }
       .feed-state {
         min-width: 78px;
@@ -1346,12 +1218,8 @@
       .reveal {
         animation: none;
       }
-      .scan-beam,
       .status-chip,
       .feed-track,
-      .scroll-chevron {
-        animation: none !important;
-      }
       .btn,
       .nav a,
       input,
@@ -1376,7 +1244,7 @@
           <nav class="nav" aria-label="Primary">
             <a href="#features">What it does</a>
             <a href="#why">Why it exists</a>
-            <a href="#testing">Testing</a>
+            <a href="#system">Testing</a>
             <a href="#roadmap">Roadmap</a>
             <a href="#contact">Register interest</a>
           </nav>
@@ -1390,7 +1258,7 @@
             <section class="command-deck reveal">
               <div class="command-grid">
                 <div class="command-copy">
-                  <span class="eyebrow">Private build / Active testing</span>
+                  <span class="eyebrow">Private build / Live snapshot</span>
                   <h1>Measure the move. Control the risk. Automate the discipline.</h1>
                   <p class="lead">
                     ClawGauge is a private AI-assisted trading automation build designed to scan markets, reject weak setups and log every decision before execution.
@@ -1400,12 +1268,9 @@
                     <span>The edge is not just the signal. It is the discipline around it.</span>
                   </div>
                   <div class="hero-actions">
-                    <a class="btn btn-primary" href="#testing">Follow the build</a>
+                    <a class="btn btn-primary" href="#system">Follow the build</a>
                     <a class="btn btn-secondary" href="#contact">Register interest</a>
                   </div>
-                  <p class="disclaimer">
-                    Private testing in progress. No financial advice. No guaranteed returns. No public investment offer.
-                  </p>
                 </div>
 
                 <div class="command-visual" aria-hidden="true">
@@ -1416,131 +1281,20 @@
                     <span class="status-chip">Human oversight</span>
                   </div>
 
-                  <div class="visual-stage">
-                    <div class="scan-beam"></div>
-                    <svg class="chart-svg" viewBox="0 0 900 560" role="img" aria-label="Animated candlestick chart with blue trend line">
-                      <defs>
-                        <linearGradient id="glowLine" x1="0" y1="0" x2="1" y2="0">
-                          <stop offset="0%" stop-color="#1f7bff" />
-                          <stop offset="48%" stop-color="#44d5ff" />
-                          <stop offset="100%" stop-color="#9cf8ff" />
-                        </linearGradient>
-                        <linearGradient id="candleFill" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stop-color="#4eb5ff" />
-                          <stop offset="100%" stop-color="#0e45bb" />
-                        </linearGradient>
-                        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                          <feGaussianBlur stdDeviation="8" result="blur" />
-                          <feMerge>
-                            <feMergeNode in="blur" />
-                            <feMergeNode in="SourceGraphic" />
-                          </feMerge>
-                        </filter>
-                      </defs>
-                      <rect width="900" height="560" fill="rgba(5, 12, 24, 0.12)" />
-                      <g fill="none" stroke="rgba(160, 195, 255, 0.09)" stroke-width="1">
-                        <path d="M0 100 H900" />
-                        <path d="M0 180 H900" />
-                        <path d="M0 260 H900" />
-                        <path d="M0 340 H900" />
-                        <path d="M0 420 H900" />
-                        <path d="M0 500 H900" />
-                        <path d="M90 0 V560" />
-                        <path d="M180 0 V560" />
-                        <path d="M270 0 V560" />
-                        <path d="M360 0 V560" />
-                        <path d="M450 0 V560" />
-                        <path d="M540 0 V560" />
-                        <path d="M630 0 V560" />
-                        <path d="M720 0 V560" />
-                        <path d="M810 0 V560" />
-                      </g>
-                      <path d="M0 410 C 90 448, 160 406, 240 360 S 376 316, 452 380 S 618 474, 730 374 S 820 222, 900 120" fill="none" stroke="rgba(47, 139, 255, 0.20)" stroke-width="4" />
-                      <path d="M0 404 C 90 446, 160 404, 240 358 S 376 314, 452 378 S 618 470, 730 370 S 820 220, 900 118" fill="none" stroke="url(#glowLine)" stroke-width="6" filter="url(#glow)" />
-                      <g opacity="0.95">
-                        <g transform="translate(52 338)">
-                          <line x1="0" y1="32" x2="0" y2="-44" stroke="rgba(106, 176, 255, 0.28)" stroke-width="4" />
-                          <rect x="-16" y="-2" width="32" height="32" rx="3" fill="url(#candleFill)" />
-                        </g>
-                        <g transform="translate(100 312)">
-                          <line x1="0" y1="40" x2="0" y2="-58" stroke="rgba(106, 176, 255, 0.26)" stroke-width="4" />
-                          <rect x="-16" y="-6" width="32" height="46" rx="3" fill="url(#candleFill)" />
-                        </g>
-                        <g transform="translate(152 286)">
-                          <line x1="0" y1="48" x2="0" y2="-72" stroke="rgba(106, 176, 255, 0.22)" stroke-width="4" />
-                          <rect x="-16" y="-10" width="32" height="54" rx="3" fill="url(#candleFill)" />
-                        </g>
-                        <g transform="translate(208 262)">
-                          <line x1="0" y1="50" x2="0" y2="-78" stroke="rgba(106, 176, 255, 0.20)" stroke-width="4" />
-                          <rect x="-16" y="-8" width="32" height="52" rx="3" fill="url(#candleFill)" />
-                        </g>
-                        <g transform="translate(266 272)">
-                          <line x1="0" y1="42" x2="0" y2="-84" stroke="rgba(106, 176, 255, 0.18)" stroke-width="4" />
-                          <rect x="-16" y="-6" width="32" height="42" rx="3" fill="url(#candleFill)" />
-                        </g>
-                        <g transform="translate(330 304)">
-                          <line x1="0" y1="48" x2="0" y2="-74" stroke="rgba(106, 176, 255, 0.18)" stroke-width="4" />
-                          <rect x="-16" y="-12" width="32" height="56" rx="3" fill="url(#candleFill)" />
-                        </g>
-                        <g transform="translate(386 338)">
-                          <line x1="0" y1="42" x2="0" y2="-60" stroke="rgba(106, 176, 255, 0.18)" stroke-width="4" />
-                          <rect x="-16" y="-4" width="32" height="34" rx="3" fill="url(#candleFill)" />
-                        </g>
-                        <g transform="translate(454 326)">
-                          <line x1="0" y1="56" x2="0" y2="-104" stroke="rgba(106, 176, 255, 0.20)" stroke-width="4" />
-                          <rect x="-16" y="-8" width="32" height="60" rx="3" fill="url(#candleFill)" />
-                        </g>
-                        <g transform="translate(526 300)">
-                          <line x1="0" y1="50" x2="0" y2="-82" stroke="rgba(106, 176, 255, 0.22)" stroke-width="4" />
-                          <rect x="-16" y="-8" width="32" height="54" rx="3" fill="url(#candleFill)" />
-                        </g>
-                        <g transform="translate(596 260)">
-                          <line x1="0" y1="46" x2="0" y2="-88" stroke="rgba(106, 176, 255, 0.20)" stroke-width="4" />
-                          <rect x="-16" y="-10" width="32" height="54" rx="3" fill="url(#candleFill)" />
-                        </g>
-                        <g transform="translate(666 220)">
-                          <line x1="0" y1="48" x2="0" y2="-104" stroke="rgba(106, 176, 255, 0.18)" stroke-width="4" />
-                          <rect x="-16" y="-12" width="32" height="62" rx="3" fill="url(#candleFill)" />
-                        </g>
-                        <g transform="translate(736 170)">
-                          <line x1="0" y1="56" x2="0" y2="-118" stroke="rgba(106, 176, 255, 0.18)" stroke-width="4" />
-                          <rect x="-16" y="-8" width="32" height="74" rx="3" fill="url(#candleFill)" />
-                        </g>
-                        <g transform="translate(806 122)">
-                          <line x1="0" y1="60" x2="0" y2="-142" stroke="rgba(106, 176, 255, 0.16)" stroke-width="4" />
-                          <rect x="-16" y="-10" width="32" height="84" rx="3" fill="url(#candleFill)" />
-                        </g>
-                        <g transform="translate(866 82)">
-                          <line x1="0" y1="62" x2="0" y2="-152" stroke="rgba(106, 176, 255, 0.16)" stroke-width="4" />
-                          <rect x="-16" y="-8" width="32" height="92" rx="3" fill="url(#candleFill)" />
-                        </g>
-                      </g>
-
-                      <g fill="none" stroke="rgba(164, 183, 214, 0.08)" stroke-width="1">
-                        <path d="M0 100 H900" />
-                        <path d="M0 180 H900" />
-                        <path d="M0 260 H900" />
-                        <path d="M0 340 H900" />
-                        <path d="M0 420 H900" />
-                        <path d="M0 500 H900" />
-                      </g>
-                    </svg>
-
-                    <div class="decision-feed">
-                      <span class="feed-label">Decision feed</span>
-                      <div class="feed-viewport">
-                        <div class="feed-track" id="decision-feed-track">
-                          <div class="feed-item is-active"><span class="feed-state">HOLD</span><span class="feed-text">no eligible setup</span></div>
-                          <div class="feed-item"><span class="feed-state">BLOCK</span><span class="feed-text">risk gate triggered</span></div>
-                          <div class="feed-item"><span class="feed-state">SCAN</span><span class="feed-text">market check complete</span></div>
-                          <div class="feed-item"><span class="feed-state">LOGGED</span><span class="feed-text">decision recorded</span></div>
-                          <div class="feed-item"><span class="feed-state">REVIEW</span><span class="feed-text">controlled test mode</span></div>
-                          <div class="feed-item"><span class="feed-state">HOLD</span><span class="feed-text">no eligible setup</span></div>
-                          <div class="feed-item"><span class="feed-state">BLOCK</span><span class="feed-text">risk gate triggered</span></div>
-                          <div class="feed-item"><span class="feed-state">SCAN</span><span class="feed-text">market check complete</span></div>
-                          <div class="feed-item"><span class="feed-state">LOGGED</span><span class="feed-text">decision recorded</span></div>
-                          <div class="feed-item"><span class="feed-state">REVIEW</span><span class="feed-text">controlled test mode</span></div>
-                        </div>
+                  <div class="decision-feed">
+                    <span class="feed-label">Decision feed</span>
+                    <div class="feed-viewport">
+                      <div class="feed-track" id="decision-feed-track">
+                        <div class="feed-item is-active"><span class="feed-state">HOLD</span><span class="feed-text">no eligible setup</span></div>
+                        <div class="feed-item"><span class="feed-state">BLOCK</span><span class="feed-text">risk gate triggered</span></div>
+                        <div class="feed-item"><span class="feed-state">SCAN</span><span class="feed-text">market check complete</span></div>
+                        <div class="feed-item"><span class="feed-state">LOGGED</span><span class="feed-text">decision recorded</span></div>
+                        <div class="feed-item"><span class="feed-state">REVIEW</span><span class="feed-text">controlled test mode</span></div>
+                        <div class="feed-item"><span class="feed-state">HOLD</span><span class="feed-text">no eligible setup</span></div>
+                        <div class="feed-item"><span class="feed-state">BLOCK</span><span class="feed-text">risk gate triggered</span></div>
+                        <div class="feed-item"><span class="feed-state">SCAN</span><span class="feed-text">market check complete</span></div>
+                        <div class="feed-item"><span class="feed-state">LOGGED</span><span class="feed-text">decision recorded</span></div>
+                        <div class="feed-item"><span class="feed-state">REVIEW</span><span class="feed-text">controlled test mode</span></div>
                       </div>
                     </div>
                   </div>
@@ -1566,11 +1320,6 @@
                     <span>Assets detected</span>
                   </article>
                 </div>
-
-                <a class="scroll-trigger" href="#system">
-                  <span>Scroll to see the system under test</span>
-                  <span class="scroll-chevron" aria-hidden="true">⌄</span>
-                </a>
               </div>
             </section>
           </div>
@@ -1620,9 +1369,8 @@
           </div>
 
           <div class="metrics-copy">
-            <p><strong>ClawGauge is not being built as a trigger-happy trading bot.</strong> Across the current test window, the system has logged more than 24,800 decision events with the overwhelming majority resulting in hold, block, skip or reject outcomes.</p>
-            <p>A trading system that logs the why - not just the buy.</p>
-            <p>The goal is not constant action. The goal is controlled action: scan the market, check the conditions, reject weak setups, log the reason and only act when the rules allow it.</p>
+            <p><strong>ClawGauge is not being built as a trigger-happy trading bot.</strong> Across the current test window, the system has logged more than 24,800 decision events, and the overwhelming majority of those outcomes are hold, block, skip or reject calls.</p>
+            <p><strong>A trading system that logs the why - not just the buy.</strong> The goal is not constant action. The goal is controlled action: scan the market, check the conditions, reject weak setups, log the reason and only act when the rules allow it.</p>
           </div>
         </div>
       </section>
@@ -1637,34 +1385,32 @@
           </div>
 
           <div class="feature-grid">
-            <article class="card card-wide reveal delay-1">
-              <div class="card-segment">
-                <div class="card-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 19V5" />
-                    <path d="M8 16v-8" />
-                    <path d="M12 12V8" />
-                    <path d="M16 15V4" />
-                    <path d="M20 20V7" />
-                  </svg>
-                </div>
-                <h3>Signal scanning</h3>
-                <p>Continuously reviews market conditions to identify setups worth examining further.</p>
+            <article class="card reveal delay-1">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19V5" />
+                  <path d="M8 16v-8" />
+                  <path d="M12 12V8" />
+                  <path d="M16 15V4" />
+                  <path d="M20 20V7" />
+                </svg>
               </div>
-
-              <div class="card-segment">
-                <div class="card-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 3 4 6v6c0 5 4 8 8 9 4-1 8-4 8-9V6l-8-3Z" />
-                    <path d="m9 12 2 2 4-5" />
-                  </svg>
-                </div>
-                <h3>Risk controls</h3>
-                <p>Rules are checked before any trade path is considered acceptable for testing.</p>
-              </div>
+              <h3>Signal scanning</h3>
+              <p>Continuously reviews market conditions to identify setups worth examining further.</p>
             </article>
 
             <article class="card reveal delay-2">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3 4 6v6c0 5 4 8 8 9 4-1 8-4 8-9V6l-8-3Z" />
+                  <path d="m9 12 2 2 4-5" />
+                </svg>
+              </div>
+              <h3>Risk controls</h3>
+              <p>Rules are checked before any trade path is considered acceptable for testing.</p>
+            </article>
+
+            <article class="card reveal delay-3">
               <div class="card-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M8 7h12" />
@@ -1679,7 +1425,7 @@
               <p>Supports controlled checks, repeatable scenarios and careful validation before any expansion.</p>
             </article>
 
-            <article class="card reveal delay-3">
+            <article class="card reveal delay-4">
               <div class="card-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M12 2v20" />
@@ -1743,29 +1489,7 @@
                   </div>
                 </div>
               </div>
-              <div class="panel">
-                <p>
-                  Nothing here should be read as financial advice, investment advice, a promise of results or a public invitation to invest.
-                </p>
-              </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="testing">
-        <div class="container">
-          <div class="section-head">
-            <span class="section-kicker">Private testing</span>
-            <h2>Private testing in progress</h2>
-            <p class="section-copy">
-              ClawGauge is currently in a controlled testing phase. We’re interested in connecting with technical collaborators, early supporters and potential backers who want to follow or support the next stage of development.
-            </p>
-          </div>
-
-          <div class="testing-banner reveal">
-            <strong>This site is for information only and is not a public investment offer.</strong>
-            <p>We are documenting the build, testing the workflow and keeping the risk controls front and centre.</p>
           </div>
         </div>
       </section>
@@ -1876,16 +1600,14 @@
             <strong>ClawGauge</strong>
             <span>Measure the move. Control the risk.</span>
             <p class="footer-meta">© 2026 ClawGauge. All rights reserved.</p>
-            <p class="footer-note">
-              Private testing in progress. No financial advice. No guaranteed returns. No public investment offer.
-            </p>
+            <p class="footer-note">No financial advice. No guaranteed returns. No public investment offer.</p>
           </div>
         </div>
         <div class="footer-right">
           <nav class="footer-nav" aria-label="Footer">
             <a href="#features">What it does</a>
             <a href="#why">Why it exists</a>
-            <a href="#testing">Testing</a>
+            <a href="#system">Testing</a>
             <a href="#roadmap">Roadmap</a>
             <a href="#contact">Register interest</a>
           </nav>
